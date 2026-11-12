@@ -1,0 +1,13 @@
+Run these commands in the VS Code terminal:
+flutter doctor
+flutter create my_app
+cd my_app
+flutter run
+
+
+To create an APK:
+flutter build apk
+
+
+Output location:
+build/app/outputs/flutter-apk/app-release.apk

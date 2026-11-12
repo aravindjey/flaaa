@@ -1,0 +1,34 @@
+
+import 'package:flutter/material.dart';
+
+void main() => runApp(MaterialApp(home: Home()));
+
+class Home extends StatelessWidget {
+  final name = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("User Input")),
+      body: Padding(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          children: [
+            TextField(
+              controller: name,
+              decoration: InputDecoration(labelText: "Enter Name"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("Hello ${name.text}")),
+                );
+              },
+              child: Text("Submit"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
