@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flaaa"
+version = "0.1.0"
+description = "CLI tool to list, view, and export Flutter experiments"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [
+    { name = "Aravind", email = "aravindjayaseelan07@gmail.com" }
+]
+keywords = ["flutter", "experiments", "cli", "cheatsheet"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Environment :: Console",
+    "Topic :: Utilities",
+]
+
+[project.urls]
+Homepage = "https://github.com/aravindjey/flaaa"
+Repository = "https://github.com/aravindjey/flaaa.git"
+
+[project.scripts]
+flaaa = "flaaa.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["flaaa*"]
+
+[tool.setuptools.package-data]
+"flaaa.experiments" = ["*.txt"]

@@ -1,0 +1,56 @@
+First install the package:
+flutter pub add sqflite path
+
+
+import 'package:flutter/material.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
+
+void main() => runApp(MaterialApp(home: Home()));
+
+class Home extends StatefulWidget {
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  String result = "No data";
+
+  Future<void> saveData() async {
+    final db = await openDatabase(
+      join(await getDatabasesPath(), 'mydb.db'),
+      version: 1,
+      onCreate: (db, version) async {
+        await db.execute(
+          'CREATE TABLE notes(id INTEGER PRIMARY KEY, name TEXT)'
+        );
+      },
+    );
+
+    await db.insert('notes', {'name': 'Hello Flutter'});
+    final data = await db.query('notes');
+
+    setState(() {
+      result = data.toString();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("SQLite App")),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: saveData,
+              child: Text("Save Data"),
+            ),
+            Text(result),
+          ],
+        ),
+      ),
+    );
+  }
+}
